@@ -5,7 +5,7 @@
   <version>0.0.1-SNAPSHOT</version>
   
   	<properties>
-		<spark.version>2.5.4</spark.version>
+		<spark.version>3.1.0</spark.version>
 		<weld.version>2.3.0.Final</weld.version>
 	</properties>
 
@@ -40,7 +40,7 @@
 		<dependency>
 		    <groupId>mysql</groupId>
 		    <artifactId>mysql-connector-java</artifactId>
-		    <version>6.0.5</version>
+		    <version>5.1.39</version>
 		</dependency>
 		
 		<!-- https://mvnrepository.com/artifact/org.hibernate/hibernate-validator -->
