@@ -19,4 +19,8 @@ public class UsuarioController {
 	public List<Usuario> all() {
 		return usuarios.all();
 	}
+	
+	public void save(Usuario u) {
+		usuarios.save(u);
+	}
 }

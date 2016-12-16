@@ -9,4 +9,6 @@ public interface Repository <T extends Entidade> {
 	public T byId(int id);
 	
 	public List<T> all();
+	
+	public void save(T model);
 }
