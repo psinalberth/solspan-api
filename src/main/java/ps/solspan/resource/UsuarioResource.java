@@ -54,7 +54,15 @@ public class UsuarioResource {
 			
 			int id = Integer.parseInt(pathId);
 			
-			return usuarios.byId(id);
+			Usuario usuario = usuarios.byId(id);
+			
+			if (usuario != null) {
+				res.status(200);
+			}
+			
+			res.status(404);
+			
+			return usuario;
 		};
 		
 		return byId;
@@ -91,7 +99,7 @@ public class UsuarioResource {
 				res.header("Location", req.pathInfo());
 				
 			} else {
-				res.status(304);
+				res.status(404);
 			}
 			
 			return usuario;
@@ -116,7 +124,7 @@ public class UsuarioResource {
 				res.status(200);
 				
 			} else {
-				res.status(304);
+				res.status(404);
 			}
 			
 			return res;

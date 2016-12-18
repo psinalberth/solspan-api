@@ -24,9 +24,9 @@ public class AuthResource {
 	@Inject
 	private Gson gson;
 	
-	public Filter checkUsuario() {
+	public Filter auth() {
 		
-		Filter checkLogin = (Request req, Response res) -> {
+		Filter authFilter = (Request req, Response res) -> {
 			
 			boolean auth = false;
 			
@@ -43,7 +43,7 @@ public class AuthResource {
 			res.status(200);
 		};
 		
-		return checkLogin;
+		return authFilter;
 	}
 	
 	public Route login() {

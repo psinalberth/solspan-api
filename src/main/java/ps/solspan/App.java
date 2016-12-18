@@ -36,7 +36,7 @@ public class App {
 		
 		/** Verificação de autenticação de usuários **/
 		
-		before("/api/*", authResource.checkUsuario());
+		before("/api/*", authResource.auth());
 		
 		/** Endpoints para Autenticação **/
 		
