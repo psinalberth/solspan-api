@@ -16,17 +16,41 @@ public abstract class Entidade implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	@NotBlank
-	@Column(name="DATA_ULT_ALTERACAO")
+	@Column(name="DATA_ULT_ALTERACAO", nullable=false)
 	private Date dataAlteracao;
 	
 	@NotBlank
-	@Column(name="USUARIO_ULT_ALTERACAO")
+	@Column(name="USUARIO_ULT_ALTERACAO", length=20, nullable=false)
 	private String usuarioAlteracao;
 	
 	@Version
-	@Column(name="VERSAO")
+	@Column(name="VERSAO", columnDefinition="TINYINT(3)", nullable=false)
 	@NotNull
 	private int versao;
 
 	abstract int getId();
+
+	public Date getDataAlteracao() {
+		return dataAlteracao;
+	}
+
+	public void setDataAlteracao(Date dataAlteracao) {
+		this.dataAlteracao = dataAlteracao;
+	}
+
+	public String getUsuarioAlteracao() {
+		return usuarioAlteracao;
+	}
+
+	public void setUsuarioAlteracao(String usuarioAlteracao) {
+		this.usuarioAlteracao = usuarioAlteracao;
+	}
+
+	public int getVersao() {
+		return versao;
+	}
+
+	public void setVersao(int versao) {
+		this.versao = versao;
+	}
 }

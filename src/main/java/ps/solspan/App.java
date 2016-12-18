@@ -1,20 +1,23 @@
 package ps.solspan;
 
 import static spark.Spark.after;
+import static spark.Spark.before;
+import static spark.Spark.delete;
 import static spark.Spark.get;
 import static spark.Spark.port;
 import static spark.Spark.post;
+import static spark.Spark.put;
 
 import javax.enterprise.event.Observes;
 import javax.inject.Inject;
 
 import org.jboss.weld.environment.se.events.ContainerInitialized;
 
-import com.google.gson.Gson;
-
-import ps.solspan.controller.UsuarioController;
-import ps.solspan.model.Usuario;
+import ps.solspan.resource.AuthenticationResource;
+import ps.solspan.resource.UsuarioResource;
 import ps.solspan.transformer.JsonTransformer;
+import ps.solspan.util.Path;
+import spark.debug.DebugScreen;
 
 public class App {
 	
@@ -22,44 +25,36 @@ public class App {
 	private JsonTransformer transformer;
 	
 	@Inject
-	private UsuarioController usuarioController;
+	private AuthenticationResource authResource;
 	
 	@Inject
-	private Gson gson;
+	private UsuarioResource usuarioResource;
 	
 	public void createApp(@Observes ContainerInitialized event) {
 		
 		port(8989);
 		
-		get("/api/usuarios/:id", (request, response) -> {
-			
-			String pathId = request.params("id");
-			
-			int id = Integer.parseInt(pathId);
-			
-			return usuarioController.byId(id);
-			
-		}, transformer);
+		/** Verificação de autenticação de usuários **/
 		
-		get("/api/usuarios", (request, response) -> {
-			return usuarioController.all();
-		}, transformer);
+		before("/api/*", authResource.checkUsuario());
 		
-		post("api/usuarios", (request, response) -> {
-			
-			Usuario u = gson.fromJson(request.body(), Usuario.class);
-			
-			usuarioController.save(u);
-			
-			response.status(201);
-			response.header("Location", request.pathInfo());
-			
-			return u;
-			
-		}, transformer);
+		/** Endpoints para Autenticação **/
+		
+		post(Path.LOGIN, authResource.login(), transformer);
+		get(Path.LOGOUT, authResource.logout(), transformer);
+		
+		/** Endpoints para Usuário **/
+		
+		get(Path.USUARIO_ID, usuarioResource.byId(), transformer);
+		get(Path.USUARIO_INDEX, usuarioResource.all(), transformer);
+		post(Path.USUARIO_INDEX, usuarioResource.save(), transformer);
+		put(Path.USUARIO_ID, usuarioResource.update(), transformer);
+		delete(Path.USUARIO_ID, usuarioResource.delete(), transformer);
 		
 		after((request, response) -> {
 			response.type("application/json");
 		});
+		
+		DebugScreen.enableDebugScreen();
 	}
 }

@@ -21,16 +21,20 @@ public class Usuario extends Entidade {
 	private int id;
 	
 	@NotBlank
-	@Column(name="NOME")
+	@Column(name="NOME", length=60, nullable=false)
 	private String nome;
 	
 	@NotBlank
-	@Column(name="LOGIN")
+	@Column(name="LOGIN", length=20, nullable=false, unique=true)
 	private String login;
 	
 	@NotBlank
-	@Column(name="PASSWORD")
-	private String password;
+	@Column(name="SENHA", length=128, nullable=false)
+	private String senha;
+	
+	@NotBlank
+	@Column(name="SALT", length=64, nullable=false)
+	private String salt;
 
 	public int getId() {
 		return id;
@@ -56,11 +60,19 @@ public class Usuario extends Entidade {
 		this.login = login;
 	}
 
-	public String getPassword() {
-		return password;
+	public String getSenha() {
+		return senha;
 	}
 
-	public void setPassword(String password) {
-		this.password = password;
+	public void setSenha(String senha) {
+		this.senha = senha;
+	}
+	
+	public String getSalt() {
+		return salt;
+	}
+	
+	public void setSalt(String salt) {
+		this.salt = salt;
 	}
 }

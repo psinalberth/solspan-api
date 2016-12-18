@@ -5,5 +5,7 @@ import ps.solspan.repository.Usuarios;
 
 public class UsuarioDao extends RepositoryDao<Usuario> implements Usuarios {
 	
-	
+	public Usuario byLogin(String login) {
+		return by("login", login);
+	}
 }

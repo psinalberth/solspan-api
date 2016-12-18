@@ -11,4 +11,8 @@ public interface Repository <T extends Entidade> {
 	public List<T> all();
 	
 	public void save(T model);
+	
+	public void update(T model);
+	
+	public void delete(T model);
 }
