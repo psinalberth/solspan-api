@@ -4,16 +4,25 @@ public class Path {
 	
 	private static final String ROOT_API = "/api/";
 	
-	public static final String LOGIN  = "/login";
-	public static final String LOGOUT = "/logout";
+	public static class Usuario {
+		
+		static final String USUARIO = ROOT_API + "usuarios";
+		
+		public static final String INDEX = USUARIO + "/";
+		public static final String ID = USUARIO + "/:id";
+	}
 	
-	static final String USUARIO = ROOT_API + "usuarios";
+	public static class Auth {
+		
+		public static final String LOGIN  = "/login";
+		public static final String LOGOUT = "/logout";
+	}
 	
-	public static final String USUARIO_INDEX = USUARIO + "/";
-	public static final String USUARIO_ID = USUARIO + "/:id";
-	
-	static final String SOLICITACAO = ROOT_API + "solicitacoes";
-	
-	public static final String SOLICITACAO_INDEX = SOLICITACAO + "/";
-	public static final String SOLICITACAO_ID = SOLICITACAO + "/:id";
+	public static class Solicitacao {
+		
+		static final String SOLICITACAO = ROOT_API + "solicitacoes";
+		
+		public static final String INDEX = SOLICITACAO + "/";
+		public static final String ID = SOLICITACAO + "/:id";
+	}
 }

@@ -13,7 +13,7 @@ import javax.inject.Inject;
 
 import org.jboss.weld.environment.se.events.ContainerInitialized;
 
-import ps.solspan.resource.AuthenticationResource;
+import ps.solspan.resource.AuthResource;
 import ps.solspan.resource.UsuarioResource;
 import ps.solspan.transformer.JsonTransformer;
 import ps.solspan.util.Path;
@@ -25,7 +25,7 @@ public class App {
 	private JsonTransformer transformer;
 	
 	@Inject
-	private AuthenticationResource authResource;
+	private AuthResource authResource;
 	
 	@Inject
 	private UsuarioResource usuarioResource;
@@ -40,16 +40,16 @@ public class App {
 		
 		/** Endpoints para Autenticação **/
 		
-		post(Path.LOGIN, authResource.login(), transformer);
-		get(Path.LOGOUT, authResource.logout(), transformer);
+		post(Path.Auth.LOGIN, authResource.login(), transformer);
+		get(Path.Auth.LOGOUT, authResource.logout(), transformer);
 		
 		/** Endpoints para Usuário **/
 		
-		get(Path.USUARIO_ID, usuarioResource.byId(), transformer);
-		get(Path.USUARIO_INDEX, usuarioResource.all(), transformer);
-		post(Path.USUARIO_INDEX, usuarioResource.save(), transformer);
-		put(Path.USUARIO_ID, usuarioResource.update(), transformer);
-		delete(Path.USUARIO_ID, usuarioResource.delete(), transformer);
+		get(Path.Usuario.ID, usuarioResource.byId(), transformer);
+		get(Path.Usuario.INDEX, usuarioResource.all(), transformer);
+		post(Path.Usuario.INDEX, usuarioResource.save(), transformer);
+		put(Path.Usuario.ID, usuarioResource.update(), transformer);
+		delete(Path.Usuario.ID, usuarioResource.delete(), transformer);
 		
 		after((request, response) -> {
 			response.type("application/json");
