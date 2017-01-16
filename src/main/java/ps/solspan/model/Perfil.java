@@ -12,15 +12,15 @@ import org.hibernate.validator.constraints.NotBlank;
 import com.google.gson.annotations.Expose;
 
 @Entity
-@Table(name="USUARIO")
-public class Usuario extends Entidade {
-	
-	private static final long serialVersionUID = 5224424896332715491L;
+@Table(name="PERFIL")
+public class Perfil extends Entidade {
+
+	private static final long serialVersionUID = -4988665697252536062L;
 	
 	@Expose(serialize=true, deserialize=true)
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
-	@Column(name="ID_USUARIO")
+	@Column(name="ID_PERFIL")
 	private int id;
 	
 	@Expose(serialize=true, deserialize=true)
@@ -30,56 +30,31 @@ public class Usuario extends Entidade {
 	
 	@Expose(serialize=true, deserialize=true)
 	@NotBlank
-	@Column(name="LOGIN", length=20, nullable=false, unique=true)
-	private String login;
-	
-	@Expose(serialize=true, deserialize=true)
-	@NotBlank
-	@Column(name="SENHA", length=128, nullable=false)
-	private String senha;
-	
-	@Expose(serialize=false, deserialize=true)
-	@NotBlank
-	@Column(name="SALT", length=64, nullable=false)
-	private String salt;
+	@Column(name="DESCRICAO", length=100, nullable=false)
+	private String descricao;
 
+	@Override
 	public int getId() {
 		return id;
 	}
-
+	
 	public void setId(int id) {
 		this.id = id;
 	}
-
+	
 	public String getNome() {
 		return nome;
 	}
-
+	
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
-
-	public String getLogin() {
-		return login;
-	}
-
-	public void setLogin(String login) {
-		this.login = login;
-	}
-
-	public String getSenha() {
-		return senha;
-	}
-
-	public void setSenha(String senha) {
-		this.senha = senha;
+	
+	public String getDescricao() {
+		return descricao;
 	}
 	
-	public String getSalt() {
-		return salt;
-	}
-	
-	public void setSalt(String salt) {
-		this.salt = salt;
+	public void setDescricao(String descricao) {
+		this.descricao = descricao;
 	}
 }

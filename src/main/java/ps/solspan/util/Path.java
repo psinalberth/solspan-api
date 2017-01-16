@@ -2,7 +2,7 @@ package ps.solspan.util;
 
 public class Path {
 	
-	private static final String ROOT_API = "/api/";
+	public static final String ROOT_API = "/api/";
 	
 	public static class Usuario {
 		
@@ -10,6 +10,14 @@ public class Path {
 		
 		public static final String INDEX = USUARIO + "/";
 		public static final String ID = USUARIO + "/:id";
+	}
+	
+	public static class Perfil {
+		
+		static final String PERFIL = ROOT_API + "perfis";
+		
+		public static final String INDEX = PERFIL + "/";
+		public static final String ID = PERFIL + "/:id";
 	}
 	
 	public static class Auth {
